@@ -1,6 +1,6 @@
-import React from 'react';
-import { useQuery } from '@apollo/client';
-import { QUERY_CATEGORIES } from '../../utils/queries';
+import React from "react";
+import { useQuery } from "@apollo/client";
+import { QUERY_CATEGORIES } from "../../utils/queries";
 
 function CategoryMenu({ setCategory }) {
   const { data: categoryData } = useQuery(QUERY_CATEGORIES);
