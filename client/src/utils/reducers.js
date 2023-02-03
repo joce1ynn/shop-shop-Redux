@@ -1,3 +1,4 @@
+// A reducer is a function that updates state by returning a new state object and never alters the original state object.
 import { useReducer } from "react";
 
 import {
@@ -34,6 +35,9 @@ export const reducer = (state, action) => {
   }
 };
 
+// initialize global state object and 
+// fucntion for updating that state by running it through custom reducer() function
 export function useProductReducer(initialState) {
+  // useReducer() Hook is meant specifically for managing a greater level of state,
   return useReducer(reducer, initialState);
 }
