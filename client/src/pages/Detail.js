@@ -1,24 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-
+import { useStoreContext } from "../utils/GlobalState";
+import { UPDATE_PRODUCTS } from "../utils/actions";
 import { QUERY_PRODUCTS } from '../utils/queries';
 import spinner from '../assets/spinner.gif';
 
 function Detail() {
+  const [state, dispatch] = useStoreContext()
   const { id } = useParams();
 
   const [currentProduct, setCurrentProduct] = useState({});
 
   const { loading, data } = useQuery(QUERY_PRODUCTS);
 
-  const products = data?.products || [];
+  const { products } = state;
 
   useEffect(() => {
+    //检查我们的全局状态products数组中是否有数据
     if (products.length) {
+      //如果存在，我们将使用它来确定哪个产品是我们要显示的当前产品
+      //它会找到具有_id我们从useParams()Hook中获取的匹配值的值
       setCurrentProduct(products.find((product) => product._id === id));
+    } else if (data) {
+      dispatch({
+        type: UPDATE_PRODUCTS,
+        products: data.products
+      })
     }
-  }, [products, id]);
+    // dependency array.
+  }, [products, data, dispatch, id]);
 
   return (
     <>
