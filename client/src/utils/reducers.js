@@ -5,7 +5,13 @@ import {
   UPDATE_PRODUCTS,
   UPDATE_CATEGORIES,
   UPDATE_CURRENT_CATEGORY,
-} from "./actions";
+  ADD_TO_CART,
+  ADD_MULTIPLE_TO_CART,
+  REMOVE_FROM_CART,
+  UPDATE_CART_QUANTITY,
+  CLEAR_CART,
+  TOGGLE_CART
+} from './actions';
 
 // a reducer function should always return a new state, rather than mutating the original state.
 export const reducer = (state, action) => {
@@ -35,6 +41,61 @@ export const reducer = (state, action) => {
         // so there's no need to create a shallow copy of it using the spread operator 
         currentCategory: action.currentCategory,
       };
+
+    case ADD_TO_CART:
+      return {
+        ...state,
+        cartOpen: true,
+        cart: [...state.cart, action.product]
+      };
+
+
+    case ADD_MULTIPLE_TO_CART:
+      return {
+        ...state,
+        cart: [...state.cart, ...action.products],
+      };
+
+    case REMOVE_FROM_CART:
+      //filter() only keeps the items that don't match the provided _id property.
+      let newState = state.cart.filter(product => {
+        return product._id !== action._id;
+      });
+
+      return {
+        ...state,
+        cartOpen: newState.length > 0,
+        cart: newState
+      };
+
+    case UPDATE_CART_QUANTITY:
+      return {
+        ...state,
+        cartOpen: true,
+        //map() create a new array, the original state should be treated as immutable.
+        cart: state.cart.map(product => {
+          if (action._id === product._id) {
+            product.purchaseQuantity = action.purchaseQuantity;
+          }
+          return product;
+        })
+      };
+
+    case CLEAR_CART:
+      return {
+        ...state,
+        cartOpen: false,
+        cart: []
+      }
+
+    case TOGGLE_CART:
+      return {
+        ...state,
+        //expect cartOpen to be the opposite of its previous value each time the action is called
+        cartOpen: !state.cartOpen
+      }
+
+
 
     // if it's none of these actions, do not update state at all and keep things the same!
     default:
