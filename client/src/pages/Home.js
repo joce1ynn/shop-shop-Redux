@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import ProductList from "../components/ProductList";
 import CategoryMenu from "../components/CategoryMenu";
+import Cart from "../components/Cart";
 
 const Home = () => {
 
@@ -10,6 +11,7 @@ const Home = () => {
       <CategoryMenu />
       {/* currentCategory passed to the ProductList component as a prop and instructs which category's products should be retrieved using Apollo */}
       <ProductList />
+      <Cart />
     </div>
   );
 };
