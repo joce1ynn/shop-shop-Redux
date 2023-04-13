@@ -3,6 +3,7 @@ import { useQuery } from "@apollo/client";
 import { QUERY_CATEGORIES } from "../../utils/queries";
 import { useStoreContext } from "../../utils/GlobalState";
 import { UPDATE_CATEGORIES, UPDATE_CURRENT_CATEGORY } from '../../utils/actions';
+import { idbPromise } from "../../utils/helpers";
 
 function CategoryMenu() {
   // useStoreContext( to retrieve the current state from the global state object 
@@ -11,7 +12,7 @@ function CategoryMenu() {
   // destructure categories out of state
   const { categories } = state;
   // fetch categories data
-  const { data: categoryData } = useQuery(QUERY_CATEGORIES)
+  const { loading, data: categoryData } = useQuery(QUERY_CATEGORIES)
 
   useEffect(() => {
     // if categoryData exists or has changed from the response of useQuery, 
