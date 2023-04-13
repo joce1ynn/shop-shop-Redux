@@ -23,9 +23,22 @@ function CategoryMenu() {
       dispatch({
         type: UPDATE_CATEGORIES,
         categories: categoryData.categories
+      });
+      // save data to idb
+      categoryData.categories.forEach(category => {
+        idbPromise("categories", "put", category)
       })
     }
-  }, [categoryData, dispatch])
+    // if not loading, still get the data from idb
+    else if (!loading) {
+      idbPromise("categories", "get").then(categories => {
+        dispatch({
+          type: UPDATE_CATEGORIES,
+          categories: categories
+        })
+      })
+    }
+  }, [categoryData, loading, dispatch])
 
   const handleClick = id => {
     dispatch({
