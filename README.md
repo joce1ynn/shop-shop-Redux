@@ -13,15 +13,22 @@
 
 ## Description:
 
-This is a command-line application that dynamically generates a professional README.md file from a user's input using the Inquirer package.
+A e-commerce application called Shop-Shop.
 
 ## Technology:
 
 Project is created with:
 
-- Javascript
+- MongoDB
+- Express.js
+- React.js
 - Node.js
-- Inquirer.js
+- JavaScript
+- GraphQL API
+- Apollo Server
+- Stripe API
+- React Redux
+- IndexedDB
 
 ## Installation
 
@@ -33,23 +40,15 @@ npm install
 
 ## Usage
 
-After installing npm packages, seed the MongoDB database collections by using the following command:
-
-```
-npm run seed
-```
-
 the application will be invoked by using the following command:
 
 ```
-npm start
+npm run develop
 ```
-
-[Click me to see the app!](https:)
 
 #### Example Screenshot
 
-![Screenshot](./assets/images/ET-1.png)
+![Screenshot](./client/src/assets/shop.png)
 
 ## License
 
@@ -62,7 +61,7 @@ Made by Wenwen Tian
 
 ## Test Instructions
 
-To run tests for this application, you can run the following command:
+To test the application, navigate to the `client` directory and run the following command:
 `npm run test`
 
 ## Questions?
